@@ -6,19 +6,15 @@
   --black: #040404;
 }
 
-.light-mode {
-  --bg-primary-color: #FF6B6B;
-  --bg-secondary-color: #f78215;
-  --bg-third-color: #6fc0e1;
-  --white: #040404;
-  --black: #fff;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
+}
+
+html {
+  height: -webkit-fill-available;
 }
 
 body {
@@ -29,17 +25,31 @@ body {
     var(--bg-primary-color) 50%,
     var(--bg-secondary-color) 100%
   );
+  background-attachment: fixed;
   color: var(--white);
   font-family: "kind_sansthin", sans-serif;
   font-size: 1rem;
   overflow-x: hidden;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.scene {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
 }
 
 .scene i {
   position: absolute;
   background: white;
+  pointer-events: none;
   border-radius: 50%;
   animation: animate linear infinite;
+  z-index: -1;
 }
 
 @keyframes animate {
@@ -94,6 +104,10 @@ header nav li:first-child {
   font-size: 2rem;
   font-weight: bold;
   cursor: pointer;
+}
+
+header li:not(:first-child) {
+  font-weight: 900;
 }
 
 header li:not(:first-child):hover,
@@ -208,52 +222,6 @@ header li:not(:first-child):focus {
   left: 0;
 }
 
-/********** Light Bulb Animation **********/
-.lightbulb-container {
-  position: fixed;
-  top: 0;
-  left: 95%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: wobble 4s ease-in-out infinite; /* Added wobble animation */
-  transform-origin: top;
-}
-
-.cord {
-  width: 0.8px;
-  height: 80px;
-  margin: 3px 0;
-  background-color: var(--white);
-  transition: height 0.2s ease-out;
-}
-
-/* Toggle icon (Sun/Moon) */
-.toggle-icon {
-  width: 40px;
-  height: 40px;
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  filter: drop-shadow(0 0 5px rgba(255, 204, 112, 0.7));
-  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s ease-out;
-  cursor: grab;
-}
-
-/* Light Mode Adjustments */
-.light-mode .toggle-icon {
-  /* background-color: #fff; */
-  filter: drop-shadow(0 0 8px rgba(255, 221, 112, 0.8));
-}
-
-/* Glow effect when switching */
-.glow {
-  animation: glowEffect 0.5s ease-out;
-}
-
 @keyframes glowEffect {
   0% {
     filter: drop-shadow(0 0 5px rgba(255, 204, 112, 0.7));
@@ -305,14 +273,10 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 95vh;
+  height: auto;
   width: 80%;
-  margin: 4rem auto;
+  margin: 7rem auto;
 }
-
-/* #about_me {
-  margin-top: 4rem;
-} */
 
 #job_title {
   font-family: "loyal_sansregularv1", sans-serif;
@@ -324,6 +288,7 @@ section {
 #description {
   color: var(--white);
   font-size: 1.2rem;
+  font-weight: 800;
   line-height: 1.5;
   margin: 1rem 0;
   text-align: justify;
@@ -346,79 +311,199 @@ canvas {
   display: block;
 }
 
-#skills {
-  text-align: center; /* Ensure title is centered */
-  padding-top: 2rem; /* Add some space at the top */
-  margin-bottom: 1rem;
-  margin-top: 8rem;
-}
-
-.skill-img {
-  width: 50px;
-  height: 50px;
-  margin-top: 1.5rem;
-  margin-bottom: 4rem;
-}
-
 #skills_title,
 #projects_title {
   font-size: 4.5rem;
   font-family: "loyal_sansregularv1", sans-serif;
-  margin-bottom: 6rem; /* Space between title and skill blocks */
+  margin-bottom: 3rem; /* Space between title and skill blocks */
 }
 
+/* Container adjustment */
 #skill_blocks_container {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: nowrap;
-  height: auto; /* Allow the container to grow based on content */
-  /* min-height: 80vh; Optional: Add a minimum height if needed */
-  width: 100%; /* Ensure it stretches full width */
-}
-
-.skill_block {
-  background: linear-gradient(
-    180deg,
-    var(--bg-primary-color) 0%,
-    var(--bg-secondary-color) 100%
-  );
-  opacity: 1;
-  width: 25%;
-  height: 100%;
-  padding: 1.5rem 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  line-height: 3rem;
-  border-radius: 30px;
-  border: 1px solid var(--white);
-  position: relative;
-}
-
-.skill_block svg {
-  fill: var(--white);
-}
-
-.skill_block:hover,
-.skill_block:active,
-.skill_block:focus {
-  border: none;
-  box-shadow: 3px 3px 18px rgb(255, 255, 255), -3px -3px 18px rgb(255, 255, 255);
-  transition: 0.2s ease-in-out;
-}
-
-.skill_block ul {
-  display: flex;
-  flex-direction: column;
+  gap: 4rem; /* Adds space between cards */
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  list-style: none;
-  font-family: "loyal_sansregularv1", sans-serif;
-  font-size: 2rem;
-  line-height: 2.8rem;
-  margin-bottom: 2.5rem;
+  width: 100%;
+  padding: 0 2rem;
 }
+
+/* --- Core Container --- */
+.star-map-container {
+  position: relative;
+  width: 100%;
+  height: 650px; /* Slightly taller to accommodate more skills */
+  margin: 0 auto;
+  perspective: 1000px;
+  overflow: visible;
+}
+
+/* --- Constellation Lines --- */
+.constellation-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.constellation-line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.25); /* More subtle */
+  stroke-width: 1px;
+  stroke-dasharray: 6 4; /* Elegant dashed pattern */
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
+}
+
+@keyframes lineFade {
+  from { opacity: 0.2; }
+  to { opacity: 0.6; }
+}
+
+/* --- Skill Nodes (Stars) --- */
+.skill-node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Tell the browser to scale from the bottom center */
+  transform-origin: bottom center; 
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.star-glow {
+  border-radius: 50%;
+  margin-top: 8px;
+  animation: pulse 3s infinite ease-in-out;
+}
+
+.skill-label {
+  font-family: "kind_sansthin", sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+/* --- Proficiency Hierarchy --- */
+/* Expert: Top skills like VueJS, ReactJS, Laravel  */
+.expert .skill-label { font-size: 1.4rem; color: #ffcc70; text-shadow: 0 0 15px #ffcc70; }
+.expert .star-glow { background: #ffcc70; box-shadow: 0 0 20px #ffcc70; width: 12px; height: 12px; }
+
+/* Advanced: Solid stack like PostgreSQL, NodeJS, PHP [cite: 10, 61, 62] */
+.advanced .skill-label { font-size: 1.1rem; color: #ffffff; }
+.advanced .star-glow { background: #ffffff; box-shadow: 0 0 15px #ffffff; width: 8px; height: 8px; }
+
+/* Intermediate: MongoDB, Java, Python  */
+.intermediate .skill-label { 
+  font-size: 1rem; /* Slightly larger for legibility */
+  color: rgba(255, 255, 255, 0.9); /* Much more opaque */
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4); /* Subtle label glow */
+  opacity: 1; /* Ensure they aren't faded */
+}
+
+.intermediate .star-glow { 
+  background: rgba(255, 255, 255, 0.8); 
+  width: 6px; 
+  height: 6px; 
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5); /* Stronger star glow */
+  opacity: 1; 
+}
+
+/* --- Interactivity --- */
+.skill-node:hover {
+  transform: scale(1.2);
+  z-index: 10;
+}
+
+.skill-node:hover .skill-label {
+  color: #fff;
+  opacity: 1;
+  text-shadow: 0 0 20px rgba(255,255,255,0.8);
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+}
+
+/* --- Responsive Layout --- */
+@media screen and (max-width: 800px) {
+  .star-map-container {
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    position: static;
+  }
+  .constellation-svg { display: none; } /* Hide lines on mobile to avoid clutter */
+  .skill-node { position: static !important; padding: 10px; }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; text-shadow: 0 0 12px white; }
+}
+
+.intermediate .skill-label {
+  animation: twinkle 4s infinite ease-in-out;
+}
+
+/* Tooltip Styling */
+.skill-node::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 130%; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  
+  /* High Contrast Background */
+  background: #101736; /* Using your solid --bg-primary-color */
+  color: #ffffff;
+  border: 1.5px solid rgb(255, 204, 112); /* Expert gold color */
+  
+  padding: 12px;
+  border-radius: 10px;
+  font-family: sans-serif; /* Clean font for small text */
+  font-size: 0.85rem;
+  line-height: 1.4;
+  text-align: center;
+  
+  /* Hidden state */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 999;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+}
+
+/* Show on Hover */
+.skill-node:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Triangle/Arrow for the tooltip */
+.skill-node:hover::before {
+  content: '';
+  position: absolute;
+  bottom: 110%;
+  left: 50%;    
+  transform: translateX(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: rgba(255, 204, 112, 0.5) transparent transparent transparent;
+  opacity: 1;
+  transition: all 0.3s ease;
+} 
 
 #projects {
   display: flex;
@@ -426,110 +511,102 @@ canvas {
   justify-content: center;
   align-items: center;
   height: auto;
-  margin-top: 12rem;
+  margin-top: 8rem;
+  padding-bottom: 5rem;
 }
 
-#studio, #ski {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin: 7rem 0;
-}
-
-.img_container {
-  width: 45%;
-  height: 500px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-.img_container img {
+#projects_container {
+  display: grid;
+  /* Auto-fit columns, min-width 300px, max 1fr */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
   width: 100%;
-  height: auto;
-  object-fit: cover;
-  object-position: center;
+  max-width: 1200px; /* Limits the overall width */
+  margin-top: 2rem;
 }
 
-.project_info {
-  width: 50%;
-  height: 500px;
+.project-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: -25px;
+  /* Darker glass effect to keep project screenshots legible */
+  background: rgba(16, 23, 54, 0.4); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  /* Thin, glowing border */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
 }
 
-.project_info h2 {
-  font-size: 3.5rem;
-  font-family: "loyal_sansregularv1", sans-serif;
-  margin: 1rem 0;
+.project-card:hover {
+  transform: translateY(-12px);
+  /* Brighter glow on hover to match your star nodes */
+  border-color: rgba(255, 204, 112, 0.4); 
+  box-shadow: 0 0 25px rgba(255, 204, 112, 0.1);
 }
 
-#studio .project_info ul {
-  width: 25%;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  list-style-type: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+.card-image-container {
+  height: 300px; /* Fixed height for image area */
+  overflow: hidden;
+  border-bottom: 1px solid var(--white);
 }
 
-#ski .project_info ul {
-  width: 55%;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  list-style-type: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+.card-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.8) contrast(1.1);
+  transition: filter 0.4s ease;
 }
 
-.project_info ul li {
-  font-size: 1.2rem;
-  font-family: "loyal_sansregularv1", sans-serif;
-  font-weight: 700;
-  cursor: pointer;
-  border: 1px solid var(--white);
-  border-radius: 30px;
-  padding: 3px 20px;
+.project-card:hover .card-image-container img {
+  /*transform: scale(1.05);*/
+  filter: brightness(1);
 }
 
-.project_info p {
-  font-size: 1.2rem;
-  line-height: 1.5;
-  margin: 1rem 0;
-  text-align: justify;
+.card-info {
+  padding: 2rem 1.5rem;
+  background: transparent; /* Remove any solid background */
+  text-align: center;
 }
 
-.project_info a {
-  display: flex;
-  margin: 1rem 0;
-  padding: 0.5rem 1.2rem;
-  font-weight: 700;
-  border: 1px solid var(--white);
-  border-radius: 5px;
-  background-color: transparent;
+.card-info h3 {
   color: var(--white);
-  cursor: pointer;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
+  font-family: "loyal_sansregularv1", sans-serif;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
 }
 
-.project_info a:hover, .project_info ul li:hover {
-  background-color: var(--white);
-  color: var(--black);
-  transition: 0.3s ease-in-out;
+.tech-stack-preview {
+  color: #ffcc70; /* Use your "Expert Star" gold color for the tech tags */
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.view-details-btn {
+  margin-top: auto; /* Pushes button to the bottom if content varies */
+  padding: 0.8rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  border-radius: 50px; /* Pill shape to match Skill tags */
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-details-btn:hover {
+  background: var(--white);
+  color: var(--bg-primary-color);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
 }
 
 #get_in_touch {
-  font-size: 3.2rem;
-  margin-top: 4rem;
+  font-size: 4.5rem;
+  margin-bottom: 4rem;
   font-family: "loyal_sansregularv1", sans-serif;
 }
 
@@ -574,7 +651,7 @@ canvas {
 
 #contact_form textarea {
   width: 90%;
-  height: 40%;
+  height: 200px;
   margin: 0.5rem 0;
   padding: 0.5rem;
   border: 1px solid var(--white);
@@ -607,6 +684,24 @@ canvas {
 
 #contact_form button:hover svg path {
   fill: var(--black);
+}
+
+#error_msg {
+  display: none;
+  width: 90%;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  background: rgba(255, 77, 77, 0.1);
+  border: 1px solid rgba(255, 77, 77, 0.3);
+  color: #ff4d4d; /* High contrast red */
+  text-align: center;
+  font-weight: 600;
+  backdrop-filter: blur(5px);
+}
+
+footer {
+  flex-shrink: 0;
 }
 
 footer ul {

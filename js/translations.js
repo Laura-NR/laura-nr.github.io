@@ -45,12 +45,12 @@ const translations = {
         send: "Send",
       },
       footer: {
-        copyright: "© 2024 Laura Nunez. All Rights Reserved.",
+        copyright: "© 2026 Laura Nunez. All Rights Reserved.",
       },
     },
     es: {
       navbar: {
-        skills: "Habilidades:",
+        skills: "Habilidades",
         projects: "Proyectos",
         contact: "Contacto",
         download_cv: "Descargar CV",
@@ -93,12 +93,12 @@ const translations = {
         send: "Enviar",
       },
       footer: {
-        copyright: "© 2024 Laura Nunez. Todos los derechos reservados.",
+        copyright: "© 2026 Laura Nunez. Todos los derechos reservados.",
       },
     },
     de: {
       navbar: {
-        skills: "Fähigkeiten:",
+        skills: "Fähigkeiten",
         projects: "Projekte",
         contact: "Kontakt",
         download_cv: "Lebenslauf",
@@ -141,12 +141,12 @@ const translations = {
         send: "Senden",
       },
       footer: {
-        copyright: "© 2024 Laura Nunez. Alle Rechte vorbehalten.",
+        copyright: "© 2026 Laura Nunez. Alle Rechte vorbehalten.",
       },
     },
     fr: {
       navbar: {
-        skills: "Compétences :",
+        skills: "Compétences",
         projects: "Projets",
         contact: "Contact",
         download_cv: "Télécharger CV",
@@ -189,7 +189,7 @@ const translations = {
         send: "Envoyer",
       },
       footer: {
-        copyright: "© 2024 Laura Nunez. Tous droits réservés.",
+        copyright: "© 2026 Laura Nunez. Tous droits réservés.",
       },
     },
   };

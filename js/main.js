@@ -22,45 +22,54 @@ document.addEventListener("DOMContentLoaded", () => {
   showSidebarButton.addEventListener("click", showSidebar);
 });
 
-//Function to display stars in the background
+// Function to display stars in the background
 function stars() {
-  // Set number of stars based on screen width
-  let count;
-  let screenWidth = window.innerWidth;
-
-  // For mobile (small screens), set count to around 200, for desktop leave it at 600
-  if (screenWidth <= 768) {
-    // Adjust this value based on the width threshold for mobile
-    count = 200; // Or any number suitable for mobile
-  } else {
-    count = 600; // For larger screens (desktop)
-  }
-
   let scene = document.querySelector(".scene");
-  let i = 0;
+  if (!scene) return; // Safety check
 
-  let docHeight = document.documentElement.scrollHeight;
+  // 1. Clear existing stars if the function is re-called (e.g., on resize)
+  const existingStars = scene.querySelectorAll('i');
+  existingStars.forEach(s => s.remove());
 
-  while (i < count) {
+  // 2. Set number of stars based on screen width
+  let count = window.innerWidth <= 768 ? 200 : 600;
+  
+  // 3. Use a more reliable height calculation
+  // We use the scrollHeight of the main element to ensure stars cover the whole page
+  let docHeight = scene.scrollHeight;
+
+  for (let i = 0; i < count; i++) {
     let star = document.createElement("i");
+    
+    // Calculate random values once
     let x = Math.floor(Math.random() * window.innerWidth);
     let y = Math.floor(Math.random() * docHeight);
     let duration = Math.random() * 10;
     let size = Math.random() * 2;
 
+    // Apply styles
     star.style.left = x + "px";
     star.style.top = y + "px";
     star.style.width = 1 + size + "px";
     star.style.height = 1 + size + "px";
 
+    // Use a fixed animation duration range to prevent "slow" resets
     star.style.animationDuration = 5 + duration + "s";
     star.style.animationDelay = duration + "s";
 
     scene.appendChild(star);
-    i++;
   }
 }
+
+// Run the function
 stars();
+
+// Optional: Re-run on resize to keep the background full if the user rotates their phone
+window.addEventListener('resize', () => {
+    // Use a small timeout (debounce) to prevent the browser from lagging
+    clearTimeout(window.starTimeout);
+    window.starTimeout = setTimeout(stars, 250);
+});
 
 const languageData = {
   en: `<li class="dropbtn current-language-desktop dropdown-item" id="current-language-desktop" data-lang="en">
@@ -214,50 +223,45 @@ function setLanguage(lang) {
   });
 }
 
-// Function to populate language dropdowns
 function populateLanguageDropdown(currentLang) {
-  console.log(`Populating language dropdowns with ${currentLang} as the current language.`);
-
-  // Select all dropdowns and dropdown-content elements
   const dropdowns = document.querySelectorAll('.dropdown');
   const dropdownContents = document.querySelectorAll('.dropdown-content');
 
-  // Loop through each dropdown
   dropdowns.forEach((dropdown, index) => {
     const dropdownContent = dropdownContents[index];
-
-    // Clear existing content from dropdownContent
     dropdownContent.innerHTML = '';
 
-    // Find the current language `<li>` (the one before the dropdownContent)
-    const currentLangLi = dropdown.firstElementChild;
+    // 1. Remove the old "current" button if it exists
+    const existingBtn = dropdown.querySelector('.dropbtn');
+    if (existingBtn) existingBtn.remove();
 
-    // If there is a current language `<li>`, remove it
-    if (currentLangLi && currentLangLi !== dropdown.querySelector('.dropdown-content')) {
-      currentLangLi.remove();
-    }
+    // 2. Create the NEW current language button
+    // We create a temporary element just to parse the string, then extract the LI
+    const tempCurrent = document.createElement('div');
+    tempCurrent.innerHTML = languageData[currentLang];
+    const currentBtn = tempCurrent.firstElementChild;
+    
+    // Ensure it has the correct classes for your CSS selectors
+    currentBtn.classList.add('dropbtn'); 
+    
+    // Insert it BEFORE the dropdown content ul
+    dropdown.insertBefore(currentBtn, dropdownContent);
 
-    // Create and append the current language element at the top
-    const currentLangElement = document.createElement('div');
-    currentLangElement.innerHTML = languageData[currentLang];
-    const currentLangLiElement = currentLangElement.firstElementChild;
-
-    // Insert current language element before the dropdownContent
-    dropdown.insertBefore(currentLangLiElement, dropdownContent);
-
-    // Add remaining languages to dropdownContent
+    // 3. Add the OTHER languages into the dropdown list
     Object.keys(languageData).forEach((lang) => {
       if (lang !== currentLang) {
-        const tempElement = document.createElement("div");
-        tempElement.innerHTML = languageData[lang];
-        const liElement = tempElement.firstElementChild;
-        liElement.addEventListener("click", () => changeLanguage(lang));
-        dropdownContent.appendChild(liElement);
+        const tempOther = document.createElement("div");
+        tempOther.innerHTML = languageData[lang];
+        const otherLi = tempOther.firstElementChild;
+        
+        // Ensure standard class is present for the border hover
+        otherLi.classList.add('dropdown_item');
+        
+        otherLi.addEventListener("click", () => changeLanguage(lang));
+        dropdownContent.appendChild(otherLi);
       }
     });
   });
-
-  console.log('Dropdowns populated');
 }
 
 // Function to change the language
@@ -291,123 +295,90 @@ document.addEventListener("DOMContentLoaded", () => {
 emailjs.init("GhjKA_0F-EliFpdSc"); // Replace with your actual Public Key from EmailJS
 
 // Contact form submission event
-document
-  .getElementById("contact_form")
-  .addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent the form from submitting the default way
+document.getElementById("contact_form").addEventListener("submit", function (event) {
+  event.preventDefault();
 
-    const firstName = document.getElementById("firstName").value.trim();
-    const lastName = document.getElementById("lastName").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const subject = document.getElementById("subject").value.trim();
-    const message = document.getElementById("message").value.trim();
+  const errorDiv = document.getElementById("error_msg");
+  const firstName = document.getElementById("firstName").value.trim();
+  const lastName = document.getElementById("lastName").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const subject = document.getElementById("subject").value.trim();
+  const message = document.getElementById("message").value.trim();
 
-    // Simple validation
-    if (!firstName || !lastName || !email || !subject || !message) {
-      alert("Please fill out all fields.");
-      return;
-    }
+  // Reset error message
+  errorDiv.textContent = "";
+  errorDiv.style.display = "none";
 
-    const formData = {
-      firstName,
-      lastName,
-      email,
-      subject,
-      message,
-    };
+  // Regex for basic email validation
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Send the email using EmailJS
-    emailjs.send("service_psmj8un", "template_x3t1dtk", formData).then(
-      function (response) {
-        console.log("SUCCESS!", response.status, response.text);
-        alert("Thank you! Your message has been sent.");
-        document.getElementById("contact_form").reset(); // Clears the form after submission
-      },
-      function (error) {
-        console.log("FAILED...", error);
-        alert("Oops! There was a problem sending your message.");
-      }
-    );
-  });
-
-
-  const toggleIcon = document.getElementById("toggleIcon");
-const cord = document.getElementById("cord");
-const body = document.body;
-let isDragging = false;
-
-// Set initial icon based on stored theme
-if (localStorage.getItem("theme") === "light") {
-  body.classList.add("light-mode");
-  toggleIcon.textContent = "🌙"; // Moon for light mode
-} else {
-  toggleIcon.textContent = "🌞"; // Sun for dark mode
-}
-
-toggleIcon.addEventListener("mousedown", startDrag);
-toggleIcon.addEventListener("touchstart", startDrag);
-
-function startDrag(event) {
-  isDragging = true;
-  document.addEventListener("mousemove", drag);
-  document.addEventListener("touchmove", drag);
-  document.addEventListener("mouseup", stopDrag);
-  document.addEventListener("touchend", stopDrag);
-}
-
-function drag(event) {
-  if (!isDragging) return;
-
-  let moveY = event.touches ? event.touches[0].clientY : event.clientY;
-  let maxPull = 80; // Max pull distance
-  let pullDistance = Math.min(moveY - 50, maxPull);
-
-  // Move icon
-  toggleIcon.style.transform = `translateY(${pullDistance}px)`;
-
-  // Slightly stretch the cord
-  cord.style.height = `${80 + pullDistance}px`;
-}
-
-function stopDrag() {
-  if (!isDragging) return;
-
-  isDragging = false;
-  document.removeEventListener("mousemove", drag);
-  document.removeEventListener("touchmove", drag);
-  document.removeEventListener("mouseup", stopDrag);
-  document.removeEventListener("touchend", stopDrag);
-
-  // Toggle light mode
-  body.classList.toggle("light-mode");
-
-  // Change icon
-  if (body.classList.contains("light-mode")) {
-    toggleIcon.textContent = "🌙"; // Moon for light mode
-    localStorage.setItem("theme", "light");
-  } else {
-    toggleIcon.textContent = "🌞"; // Sun for dark mode
-    localStorage.setItem("theme", "dark");
+  if (!firstName || !lastName || !email || !subject || !message) {
+    errorDiv.textContent = "Please fill out all fields.";
+    errorDiv.style.display = "block";
+    return;
   }
 
-  // Snap the icon back up
-  toggleIcon.style.transition = "transform 0.3s ease-out";
-  toggleIcon.style.transform = "translateY(0)";
+  if (!emailPattern.test(email)) {
+    errorDiv.textContent = "Please enter a valid email address.";
+    errorDiv.style.display = "block";
+    return;
+  }
+
+  // If valid, send via EmailJS
+  const formData = { firstName, lastName, email, subject, message };
+
+  emailjs.send("service_psmj8un", "template_x3t1dtk", formData).then(
+    function (response) {
+      errorDiv.textContent = "Thank you! Your message has been sent.";
+      errorDiv.style.color = "#ffcc70"; // Success gold
+      errorDiv.style.display = "block";
+      document.getElementById("contact_form").reset();
+    },
+    function (error) {
+      errorDiv.textContent = "Oops! There was a problem sending your message.";
+      errorDiv.style.color = "#ff4d4d"; // Error red
+      errorDiv.style.display = "block";
+    }
+  );
+});
+
+// Constellation lines animation
+function drawConstellation() {
+  const container = document.getElementById('constellation-container');
+  const svg = document.getElementById('constellation-svg');
+  const path = document.getElementById('constellation-path');
   
-  // Reset cord height
-  cord.style.transition = "height 0.3s ease-out";
-  cord.style.height = "80px";
+  // A more geometric path: Handle -> Top Bowl -> Bottom Bowl -> Close Bowl
+  const skillIds = [
+    'skill-react',   // Handle start
+    'skill-vue',     // Handle mid
+    'skill-node',    // Handle end / Bowl corner
+    'skill-php',     // Bowl top
+    'skill-docker',  // Bowl outer top
+    'skill-mongo',   // Bowl outer bottom
+    'skill-postgres',// Bowl bottom
+    'skill-node'     // Close the bowl
+  ]; 
+  let points = "";
 
-  // Add glow effect
-  toggleIcon.classList.add("glow");
-  setTimeout(() => {
-    toggleIcon.classList.remove("glow");
-  }, 500);
+  skillIds.forEach(id => {
+      const el = document.getElementById(id);
+      const glow = el.querySelector('.star-glow');
+      
+      // Get position relative to the container
+      const rect = glow.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      
+      const x = rect.left - containerRect.left + (rect.width / 2);  
+      const y = rect.top - containerRect.top + (rect.height / 2);
+      
+      points += `${x},${y} `;
+  });
 
-  // Add wobble effect
-  toggleIcon.classList.add("wobble");
-  setTimeout(() => {
-    toggleIcon.classList.remove("wobble");
-  }, 400);
+  path.setAttribute('points', points.trim());
 }
+
+// Draw on load and on resize
+window.addEventListener('load', drawConstellation);
+window.addEventListener('resize', drawConstellation);
 

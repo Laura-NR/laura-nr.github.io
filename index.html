@@ -117,11 +117,7 @@
                     stroke-linejoin="round"
                   /></svg
               ></a>
-            </li>
-            <div class="lightbulb-container">
-              <div class="cord" id="cord"></div>
-              <div class="toggle-icon" id="toggleIcon">🌞</div>
-            </div>            
+            </li>           
           </ul>
         </nav>
       </header>
@@ -143,9 +139,9 @@
             </defs>
           </svg>
           <img
-            src="https://lauranunez.me/resources/images/myimage.jpg"
-            alt=""
-            style="clip-path: url(#arcMask); width: 100%; max-width: 350px"
+            src="/resources/images/myimage.jpg"
+            alt="Portrait of Laura Nunez"
+            style="clip-path: url(#arcMask); width: auto; height: 350px;"
           />
           <h1 id="job_title" data-i18n="sections.job_title">Full-Stack Web Developer</h1>
           <p id="description" data-i18n="sections.description">
@@ -217,83 +213,85 @@
           </ul>
         </section>
         <section id="skills">
-          <h1 id="skills_title" data-i18n="sections.skills">My Skills!</h1>
-          <div id="skill_blocks_container">
-            <div id="first_skill_block" class="skill_block">
-              <img class="skill-img" src="resources/images/frontend.png" alt="">
-              <ul>
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>Sass</li>
-                <li>Bootstrap, Tailwind</li>
-                <li>JavaScript</li>
-                <li>ReactJS</li>
-                <li>VueJS</li>
-                <li>Angular</li>
-              </ul>
+          <h1 id="skills_title" data-i18n="sections.skills">My Tech Stack</h1>
+          
+          <div class="star-map-container" id="constellation-container">
+            <svg class="constellation-svg" id="constellation-svg">
+              <polyline id="constellation-path" class="constellation-line" />
+            </svg>
+          
+            <div class="skill-node expert" style="top: 40%; left: 10%;" id="skill-react" data-tooltip="Internship at CGI France">
+              <span class="skill-label">ReactJS</span>
+              <div class="star-glow"></div>
             </div>
-            <div id="second_skill_block" class="skill_block">
-              <img class="skill-img" src="resources/images/backend.png" alt="">
-              <ul>
-                <li>PHP</li>
-                <li>Laravel</li>
-                <li>JavaScript</li>
-                <li>NodeJS, ExpresJS</li>
-                <li>PostgreSQL</li>
-                <li>MySQL</li>
-                <li>NoSQL</li>
-                <li>Docker</li>
-              </ul>
+            <div class="skill-node expert" style="top: 55%; left: 25%;" id="skill-vue" data-tooltip="Internship at BMS Circuits">
+              <span class="skill-label">VueJS</span>
+              <div class="star-glow"></div>
             </div>
-            <div id="third_skill_block" class="skill_block">
-              <img class="skill-img" src="resources/images/soft-skills.png" alt="">
-              <ul>
-                <li data-i18n="sections.soft_skills.list.0">Team Spirit</li>
-                <li data-i18n="sections.soft_skills.list.1">Cummunication</li>
-                <li data-i18n="sections.soft_skills.list.2">Discipline</li>
-                <li data-i18n="sections.soft_skills.list.3">Organization</li>
-                <li data-i18n="sections.soft_skills.list.4">Responsibility</li>
-                <li data-i18n="sections.soft_skills.list.5">Punctuality</li>
-              </ul>
+          
+            <div class="skill-node expert" style="top: 40%; left: 40%;" id="skill-node" data-tooltip="Internship at CGI France">
+              <span class="skill-label">NodeJS</span>
+              <div class="star-glow"></div>
+            </div>
+            <div class="skill-node advanced" style="top: 55%; left: 55%;" id="skill-php" data-tooltip="University and freelance projects">
+              <span class="skill-label">PHP</span>
+              <div class="star-glow"></div>
+            </div>
+          
+            <div class="skill-node advanced" style="top: 40%; left: 70%;" id="skill-docker" data-tooltip="Used in multiple projects">
+              <span class="skill-label">Docker</span>
+              <div class="star-glow"></div>
+            </div>
+            <div class="skill-node advanced" style="top: 55%; left: 85%;" id="skill-postgres" data-tooltip="Internships at BMS Circuits and CGI France">
+              <span class="skill-label">PostgreSQL</span>
+              <div class="star-glow"></div>
+            </div>
+            <div class="skill-node advanced" style="top: 75%; left: 75%;" id="skill-mongo" data-tooltip="University projects">
+              <span class="skill-label">MongoDB</span>
+              <div class="star-glow"></div>
+            </div>
+          
+            <div class="skill-node intermediate" style="top: 20%; left: 60%;" id="skill-java" data-tooltip="University projects">
+              <span class="skill-label">Java</span>
+              <div class="star-glow"></div>
+            </div>
+            <div class="skill-node intermediate" style="top: 80%; left: 30%;" id="skill-cpp" data-tooltip="Block Release Program at CGI France">  
+              <span class="skill-label">C++</span>
+              <div class="star-glow"></div>
+            </div>
+            <div class="skill-node intermediate" style="top: 25%; left: 80%;" id="skill-python" data-tooltip="University projects">
+              <span class="skill-label">Python</span>
+              <div class="star-glow"></div>
             </div>
           </div>
         </section>
         <section id="projects">
-          <h1 id="projects_title" data-i18n="sections.projects_title">See my work !</h1>
-          <div id="studio">
-            <div class="img_container">
-              <img src="resources/images/studio.png" alt="Photography Portfolio">
+          <h1 id="projects_title" data-i18n="sections.projects_title">See my work!</h1>
+          <div id="projects_container">
+            
+            <div class="project-card" data-project-id="studio">
+              <div class="card-image-container">
+                <img src="resources/images/studio.png" alt="Photography Portfolio Screenshot">
+              </div>
+              <div class="card-info">
+                <h3 data-i18n="sections.projects.studio.title">Photography Portfolio</h3>
+                <p class="tech-stack-preview">HTML, CSS, JavaScript</p>
+                <button class="view-details-btn" data-i18n="card.view_details">View Details</button>
+              </div>
             </div>
-            <div class="project_info">
-              <h2 data-i18n="sections.projects.studio.title">Photography Portfolio</h2>
-              <ul>
-                <li>HTML</li>
-                <li>CSS</li>
-              </ul>
-              <p data-i18n="sections.projects.studio.description">
-                A photography portfolio website designed to showcase the work of a photographer with elegance and simplicity. The clean and sleek design ensures that the images remain the central focus, free from unnecessary distractions, allowing visitors to fully appreciate the artistry behind each shot. Built using HTML, CSS, and JavaScript, the website not only demonstrates technical proficiency but also emphasizes best practices in web development. Through this project, I honed my skills in these technologies while gaining valuable experience in optimizing images for web use, ensuring fast loading times without compromising quality. This project also deepened my understanding of responsive design and accessibility, creating a seamless viewing experience across devices.
-              </p>
-              <a href="" target="_blank" rel="noopener noreferrer" data-i18n="sections.projects.studio.link">Visit the Site</a>
+        
+            <div class="project-card" data-project-id="ski">
+              <div class="card-image-container">
+                <img src="resources/images/ski.png" alt="Ski Station Web Site Screenshot">
+              </div>
+              <div class="card-info">
+                <h3 data-i18n="sections.projects.ski.title">Ski Station Web Site</h3>
+                <p class="tech-stack-preview">HTML, CSS, JavaScript, PHP</p>
+                <button class="view-details-btn" data-i18n="card.view_details">View Details</button>
+              </div>
             </div>
-          </div>
-          <div id="ski">
-            <div class="project_info" class="ski_item">
-              <h2 data-i18n="sections.projects.ski.title">Ski Station Web Site</h2>
-              <ul class="ski_item">
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>JavaScript</li>
-                <li>PHP</li>
-              </ul>
-              <p data-i18n="sections.projects.ski.description">
-                A ski station website designed to provide essential information with a clean and intuitive design, ensuring users can quickly find what they need without distractions. The simple yet effective layout keeps the focus on delivering a seamless experience for visitors, whether they’re browsing for information or searching for specific details. Developed using HTML, CSS, PHP, and JavaScript, the site features a dynamic search bar and filtering functionality, enabling users to effortlessly locate ski trails, services, or facilities. This project allowed me to enhance my skills in front-end and back-end development while learning how to integrate interactive features that improve usability. Additionally, it reinforced my understanding of creating responsive and user-friendly web applications.
-              </p>
-              <a href="" target="_blank" rel="noopener noreferrer" data-i18n="sections.projects.studio.link">Visit the Site</a>
+        
             </div>
-            <div class="img_container ski_item">
-              <img src="resources/images/ski.png" alt="Photography Portfolio">
-            </div>
-          </div> 
         </section>
         <section id="contact">
           <div id="error_msg"></div>
@@ -305,6 +303,7 @@
                 name="firstName"
                 id="firstName"
                 data-i18n="contact_form.first_name"
+                required
                 placeholder="First Name"
               />
               <input
@@ -312,6 +311,7 @@
                 name="lastName"
                 id="lastName"
                 data-i18n="contact_form.last_name"
+                required
                 placeholder="Last Name"
               />
             </div>
@@ -323,12 +323,13 @@
                 data-i18n="contact_form.subject"
                 placeholder="Subject"
               />
-              <input type="email" name="email" id="email"  data-i18n="contact_form.email" placeholder="Email" />
+              <input type="email" name="email" id="email"  data-i18n="contact_form.email" required placeholder="Email" />
             </div>
             <textarea
               name="message"
               id="message"
               data-i18n="contact_form.message"
+              required
               placeholder="Your Message Here..."
             ></textarea>
             <button type="submit" data-i18n="contact_form.send">
@@ -353,7 +354,7 @@
         <ul>
           <li id="logo_footer" class="logo">Laura Nunez</li>
           <li>
-            <p data-i18n="footer.copyright">© 2024 Laura Nunez. All rights reserved.</p>
+            <p data-i18n="footer.copyright">© 2026 Laura Nunez. All rights reserved.</p>
           </li>
           <li>
             <a href="#about_me">
