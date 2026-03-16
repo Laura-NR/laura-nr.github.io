@@ -275,7 +275,7 @@ section {
   align-items: center;
   height: auto;
   width: 80%;
-  margin: 7rem auto;
+  margin: 5rem auto;
 }
 
 #job_title {
@@ -318,6 +318,10 @@ canvas {
   margin-bottom: 3rem; /* Space between title and skill blocks */
 }
 
+#skills_title {
+  margin-bottom: 0; /* Remove bottom margin for better spacing with skill blocks */
+}
+
 /* Container adjustment */
 #skill_blocks_container {
   display: flex;
@@ -332,7 +336,7 @@ canvas {
 .star-map-container {
   position: relative;
   width: 100%;
-  height: 650px; /* Slightly taller to accommodate more skills */
+  min-height: 550px; /* Base height */
   margin: 0 auto;
   perspective: 1000px;
   overflow: visible;
@@ -433,20 +437,6 @@ canvas {
   50% { transform: scale(1.3); opacity: 1; }
 }
 
-/* --- Responsive Layout --- */
-@media screen and (max-width: 800px) {
-  .star-map-container {
-    height: auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    position: static;
-  }
-  .constellation-svg { display: none; } /* Hide lines on mobile to avoid clutter */
-  .skill-node { position: static !important; padding: 10px; }
-}
-
 @keyframes twinkle {
   0%, 100% { opacity: 0.7; }
   50% { opacity: 1; text-shadow: 0 0 12px white; }
@@ -504,6 +494,22 @@ canvas {
   opacity: 1;
   transition: all 0.3s ease;
 } 
+
+#parcours {
+  min-height: 500px;
+  max-width: 1200px;
+  position: relative;
+}
+
+#parcours_title {
+  font-size: 4.5rem;
+  font-family: "loyal_sansregularv1", sans-serif;
+  margin-bottom: 7.5rem;
+  position: relative;
+  z-index: 10; /* Ensure title is on top */
+  display: block; /* Force visibility in desktop */
+  visibility: visible;
+}
 
 #projects {
   display: flex;
@@ -768,13 +774,13 @@ footer svg {
     display: flex;
     flex-direction: column;
     margin-top: 8rem;
-    margin-bottom: 25rem;
+    /*margin-bottom: 25rem;
   }
 
   #skills {
     display: flex;
     flex-direction: column;
-    margin-top: 25rem;
+    /*margin-top: 25rem;*/
   }
 
   #skill_blocks_container {
@@ -793,9 +799,9 @@ footer svg {
     margin-bottom: 2.5rem;
   }
 
-  #projects {
+  /*#projects {
     margin-top: 28rem;
-  }
+  }*/
 
   .img_container {
     height: 400px;
@@ -838,7 +844,7 @@ footer svg {
   #about_me {
     display: flex;
     flex-direction: column;
-    margin-bottom: 28rem;
+    /*margin-bottom: 28rem;*/
   }
 
   #job_title {
@@ -848,7 +854,7 @@ footer svg {
   #skills {
     display: flex;
     flex-direction: column;
-    margin-top: 28rem;
+    /*margin-top: 28rem;*/
   }
 
   .skill_block {
@@ -870,8 +876,12 @@ footer svg {
 }
 
 @media screen and (max-width: 800px) {
-  #job_title, #get_in_touch, #projects_title, #skills_title {
+  #job_title, #get_in_touch, #projects_title, #skills_title, #parcours_title {
     font-size: 3rem;
+  }
+  
+  #parcours_title {
+    margin-bottom: 3rem;
   }
 
   #description {
@@ -888,6 +898,52 @@ footer svg {
 
   #contact_form #name {
     flex-direction: column;
+  }
+
+  .star-map-container {
+    position: relative !important; 
+    height: 750px !important; /* Increased height for better vertical flow */
+    display: block !important;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .skill-node {
+    position: absolute !important;
+    transform: translate(-50%, -50%); /* Centers the node on the coordinate */
+  }
+
+  /* Spreading left values to use more of the screen width */
+  #skill-react    { left: 15%; top: 8%; }
+  #skill-vue      { left: 80%; top: 18%; }
+  #skill-node     { left: 20%; top: 32%; }
+  #skill-php      { left: 85%; top: 48%; }
+  #skill-docker   { left: 15%; top: 62%; }
+  #skill-postgres { left: 80%; top: 78%; }
+  #skill-mongo    { left: 30%; top: 92%; }
+  
+  /* Positioning intermediate nodes in the 'empty' gaps */
+  #skill-java     { left: 85%; top: 5%; }
+  #skill-cpp      { left: 10%; top: 75%; }
+  #skill-python   { left: 75%; top: 90%; }
+}
+
+@media screen and (max-width: 768px) {
+  /* Fix right margin and overflow */
+  html, body { overflow-x: hidden; width: 100%; position: relative; }
+  
+  /* Fix Portrait Image Size */
+  #about_me img {
+    height: 220px !important; /* Scale down on mobile */
+    width: auto;
+  }
+
+  /* Reduce space between sections */
+  section { margin: 3rem auto !important; }
+
+  /* Change Sidebar Close Button (X) to White */
+  #hideSideBarButton svg path {
+    fill: var(--white) !important;
   }
 }
 
@@ -1114,4 +1170,236 @@ footer svg {
     font-size: 0.8rem;
   }
   
+}
+
+/* Modal Overlay */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(4, 4, 4, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow-y: auto;
+}
+
+.modal-content {
+  background: rgba(16, 23, 54, 0.65); /* Glass Background */
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  margin: 3% auto;
+  padding: 2rem;
+  width: 90%;
+  max-width: 850px;
+  border-radius: 25px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  color: white;
+  /* Flexbox for clean layout */
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh; /* Don't let it exceed the screen height */
+  overflow-y: auto; /* Internal scrolling for content */
+  padding: 2.5rem;
+}
+
+/* Modal Header Bar [Cite: HTML Update] */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 1rem;
+}
+
+#modal-title {
+  font-family: "loyal_sansregularv1", sans-serif;
+  font-size: 2rem;
+  margin: 0;
+  line-height: 1;
+}
+
+.close-modal {
+  /* Fix misplaced position */
+  position: static; /* Remove top/right абсолю positioning */
+  font-size: 35px;
+  color: white;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* Fix huge image */
+#modal-image {
+  max-width: 100%;
+  max-height: 350px; /* Constraints image vertically */
+  object-fit: contain; /* Don't crop, show full image */
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 1rem 0;
+}
+
+#modal-description {
+  line-height: 1.6;
+  font-size: 0.95rem;
+  font-family: sans-serif;
+  color: #d0d0d0;
+  text-align: justify;
+  order: 3;
+  width: 95%;
+}
+
+/* Update these sections in style.css */
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Consistent spacing */
+  overflow-y: auto;
+}
+
+#modal-tech-stack {
+  color: #ffcc70;
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-align: center;
+  order: 2; /* Moves it between image and description */
+}
+
+#modal-link {
+  order: 4;
+  align-self: center; /* Don't make the button full width */
+  margin-bottom: 1rem;
+}
+
+/* Adjust projects container to smaller grid cards */
+#projects_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* --- Desktop: Horizontal Timeline --- */
+
+.timeline-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 4rem auto;
+  padding: 0;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 50%; /* Line is in the middle horizontally */
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom: 1px dashed rgba(255, 204, 112, 0.5);
+  transform: translateY(-50%);
+}
+
+.timeline-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%; /* Space out the 3 items */
+  position: relative;
+  z-index: 2;
+}
+
+.timeline-dot {
+  width: 14px;
+  height: 14px;
+  background: #ffcc70;
+  border-radius: 50%;
+  box-shadow: 0 0 15px #ffcc70;
+  margin: 10px 0;
+}
+
+.timeline-content {
+  width: 280px;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  position: absolute;
+}
+
+/* Alternate top and bottom positions */
+.timeline-item:nth-child(odd) .timeline-content { bottom: 40px; }
+.timeline-item:nth-child(even) .timeline-content { top: 40px; }
+
+/* --- Mobile: Vertical Timeline --- */
+@media screen and (max-width: 768px) {
+  .timeline-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 50px; /* Create a gutter for the line */
+    margin: 2rem auto;
+    position: relative;
+  }
+
+  .timeline-line {
+    /* Anchor to the left gutter */
+    left: 20px !important; 
+    top: 0;
+    bottom: 0; /* Ensures it stretches the full height of the container */
+    width: 2px;
+    height: auto; /* Let it follow the content height */
+    transform: none;
+  }
+
+  .timeline-item {
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 4rem; /* More breathing room */
+    position: relative;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -37px; /* Perfectly centers the dot over the 20px line */
+    margin: 0;
+    z-index: 5;
+  }
+  
+  .timeline-content {
+    position: static;
+    width: 90%;
+    margin-left: 20px;
+    text-align: left;
+  }
+
+  #about_me img {
+    height: 250px !important;
+    width: auto !important;
+  }
+
+  /* Force constellation nodes into a vertical column */
+  /*.star-map-container { height: 800px; }*/
+  
+  /* Rotated 90 degrees: swapping typical Left/Top logic */
+  #skill-react    { left: 20%; top: 10%; }
+  #skill-vue      { left: 60%; top: 20%; }
+  #skill-node     { left: 30%; top: 35%; }
+  #skill-php      { left: 70%; top: 50%; }
+  #skill-docker   { left: 20%; top: 65%; }
+  #skill-postgres { left: 60%; top: 80%; }
+  #skill-mongo    { left: 40%; top: 95%; }
+  
+  /* Intermediate nodes positioned around the vertical path */
+  #skill-java   { left: 80%; top: 15%; }
+  #skill-cpp    { left: 20%; top: 75%; }
+  #skill-python { left: 50%; top: 85%; }
+  
+  /* Fix Sidebar Close Icon (X) */
+  #hideSideBarButton svg path {
+    fill: var(--white) !important; /* Makes it visible */
+  }
 }

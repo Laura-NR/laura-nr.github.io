@@ -256,12 +256,45 @@
               <div class="star-glow"></div>
             </div>
             <div class="skill-node intermediate" style="top: 80%; left: 30%;" id="skill-cpp" data-tooltip="Block Release Program at CGI France">  
-              <span class="skill-label">C++</span>
+              <span class="skill-label">C#</span>
               <div class="star-glow"></div>
             </div>
             <div class="skill-node intermediate" style="top: 25%; left: 80%;" id="skill-python" data-tooltip="University projects">
               <span class="skill-label">Python</span>
               <div class="star-glow"></div>
+            </div>
+          </div>
+        </section>
+        <section id="parcours">
+          <h1 id="parcours_title" data-i18n="sections.parcours">Mon Parcours</h1>
+          <div class="timeline-container">
+            <div class="timeline-line"></div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot expert"></div>
+              <div class="timeline-content glass">
+                <span class="timeline-date">2025 - 2026</span>
+                <h3>BUT INFORMATIQUE & Alternance</h3>
+                <p>CGI France / Université de Pau</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot advanced"></div>
+              <div class="timeline-content glass">
+                <span class="timeline-date">2024</span>
+                <h3>Stage - Développeuse Web</h3>
+                <p>BMS CIRCUITS (VueJS, Laravel)</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot advanced"></div>
+              <div class="timeline-content glass">
+                <span class="timeline-date">2023 - 2024</span>
+                <h3>TP DÉVELOPPEUR WEB</h3>
+                <p>GRETA CFA AQUITAINE</p>
+              </div>
             </div>
           </div>
         </section>
@@ -394,6 +427,23 @@
           </li>
         </ul>
       </footer>
+      <div id="project-modal" class="modal">
+        <div class="modal-content glass">
+          <div class="modal-header">
+            <h2 id="modal-title"></h2>
+            <span class="close-modal">&times;</span>
+          </div>
+          
+          <div class="modal-body">
+            <div class="modal-image-container">
+              <img id="modal-image" src="" alt="Project Detail Preview">
+            </div>
+            <p id="modal-description"></p>
+            <div id="modal-tech-stack"></div>
+            <a id="modal-link" href="#" target="_blank" class="view-details-btn">Visit Repository</a>
+          </div>
+        </div>
+      </div>
     </div>
     <script
       type="text/javascript"

@@ -20,6 +20,37 @@ document.addEventListener("DOMContentLoaded", () => {
   // Attach event listeners
   hideSidebarButton.addEventListener("click", hideSidebar);
   showSidebarButton.addEventListener("click", showSidebar);
+
+  const modal = document.getElementById("project-modal");
+  const closeModal = document.querySelector(".close-modal");
+
+  // Inside DOMContentLoaded:
+  document.querySelectorAll('.view-details-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const card = e.target.closest('.project-card');
+      const projectId = card.getAttribute('data-project-id');
+      
+      // Safety check for translation structure
+      const data = translations[currentLang]?.sections?.projects?.[projectId];
+
+      if (data) {
+        document.getElementById('modal-title').innerText = data.title;
+        document.getElementById('modal-description').innerText = data.description;
+        document.getElementById('modal-image').src = card.querySelector('img').src;
+        // tech stack text can be pulled from the card paragraph
+        document.getElementById('modal-tech-stack').innerText = card.querySelector('.tech-stack-preview').innerText;
+        
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden"; // Stop background scroll
+      }
+    });
+  });
+
+  // Update closeModal:
+  closeModal.onclick = () => {
+    modal.style.display = "none";
+    document.body.style.overflow = "auto"; // Restore scroll
+  };
 });
 
 // Function to display stars in the background
@@ -64,11 +95,9 @@ function stars() {
 // Run the function
 stars();
 
-// Optional: Re-run on resize to keep the background full if the user rotates their phone
 window.addEventListener('resize', () => {
-    // Use a small timeout (debounce) to prevent the browser from lagging
-    clearTimeout(window.starTimeout);
-    window.starTimeout = setTimeout(stars, 250);
+    clearTimeout(window.drawTimeout);
+    window.drawTimeout = setTimeout(drawConstellation, 100);
 });
 
 const languageData = {
@@ -349,7 +378,7 @@ function drawConstellation() {
   const path = document.getElementById('constellation-path');
   
   // A more geometric path: Handle -> Top Bowl -> Bottom Bowl -> Close Bowl
-  const skillIds = [
+  const skillIdsWeb = [
     'skill-react',   // Handle start
     'skill-vue',     // Handle mid
     'skill-node',    // Handle end / Bowl corner
@@ -359,9 +388,22 @@ function drawConstellation() {
     'skill-postgres',// Bowl bottom
     'skill-node'     // Close the bowl
   ]; 
+
+  const skillIdsMobile = [
+    'skill-java',
+    'skill-react',
+    'skill-vue',
+    'skill-node',
+    'skill-php',
+    'skill-docker',
+    'skill-postgres',
+    'skill-mongo'
+  ];
+  const isMobile = window.matchMedia('(max-width: 800px)').matches;
+  const activeIds = isMobile ? skillIdsMobile : skillIdsWeb;
   let points = "";
 
-  skillIds.forEach(id => {
+  activeIds.forEach(id => {
       const el = document.getElementById(id);
       const glow = el.querySelector('.star-glow');
       
