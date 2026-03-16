@@ -17,10 +17,11 @@
   </head>
   <body>
     <div class="scene">
+      <canvas id="cursor-cluster-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; filter: blur(0.5px);"></canvas>
       <header>
         <nav id="header_menu">
           <ul class="sidebar">
-            <li id="hideSideBarButton">
+            <li id="hideSideBarButton" style="color: #fff;">
               <svg
                 width="25px"
                 height="25px"
@@ -29,10 +30,12 @@
               >
                 <path
                   d="M20.7457 3.32851C20.3552 2.93798 19.722 2.93798 19.3315 3.32851L12.0371 10.6229L4.74275 3.32851C4.35223 2.93798 3.71906 2.93798 3.32854 3.32851C2.93801 3.71903 2.93801 4.3522 3.32854 4.74272L10.6229 12.0371L3.32856 19.3314C2.93803 19.722 2.93803 20.3551 3.32856 20.7457C3.71908 21.1362 4.35225 21.1362 4.74277 20.7457L12.0371 13.4513L19.3315 20.7457C19.722 21.1362 20.3552 21.1362 20.7457 20.7457C21.1362 20.3551 21.1362 19.722 20.7457 19.3315L13.4513 12.0371L20.7457 4.74272C21.1362 4.3522 21.1362 3.71903 20.7457 3.32851Z"
+                  fill="#fff"
                 />
               </svg>
             </li>
             <li><a href="#skills" data-i18n="navbar.skills">Skills</a></li>
+            <li><a href="#parcours" data-i18n="navbar.parcours">Parcours</a></li>
             <li><a href="#projects" data-i18n="navbar.projects">Projects</a></li>
             <li><a href="#contact" data-i18n="navbar.contact">Contact</a></li>
             <li>
@@ -69,6 +72,7 @@
             <li><h1 id="logo_header" class="logo">Laura Nunez</h1></li>
             <li class="hideOnMobile"><a href="#skills" data-i18n="navbar.skills">Skills</a></li>
             <li class="hideOnMobile"><a href="#projects" data-i18n="navbar.projects">Projects</a></li>
+            <li class="hideOnMobile"><a href="#parcours" data-i18n="navbar.parcours">Parcours</a></li>
             <li class="hideOnMobile"><a href="#contact" data-i18n="navbar.contact">Contact</a></li>
             <li class="hideOnMobile">
               <a
@@ -220,46 +224,46 @@
               <polyline id="constellation-path" class="constellation-line" />
             </svg>
           
-            <div class="skill-node expert" style="top: 40%; left: 10%;" id="skill-react" data-tooltip="Internship at CGI France">
+            <div class="skill-node expert" style="top: 40%; left: 10%;" id="skill-react" data-i18n-tooltip="sections.skills_tooltips.cgi">
               <span class="skill-label">ReactJS</span>
               <div class="star-glow"></div>
             </div>
-            <div class="skill-node expert" style="top: 55%; left: 25%;" id="skill-vue" data-tooltip="Internship at BMS Circuits">
+            <div class="skill-node expert" style="top: 55%; left: 25%;" id="skill-vue" data-i18n-tooltip="sections.skills_tooltips.bms">
               <span class="skill-label">VueJS</span>
               <div class="star-glow"></div>
             </div>
           
-            <div class="skill-node expert" style="top: 40%; left: 40%;" id="skill-node" data-tooltip="Internship at CGI France">
+            <div class="skill-node expert" style="top: 40%; left: 40%;" id="skill-node" data-i18n-tooltip="sections.skills_tooltips.cgi">
               <span class="skill-label">NodeJS</span>
               <div class="star-glow"></div>
             </div>
-            <div class="skill-node advanced" style="top: 55%; left: 55%;" id="skill-php" data-tooltip="University and freelance projects">
+            <div class="skill-node advanced" style="top: 55%; left: 55%;" id="skill-php" data-i18n-tooltip="sections.skills_tooltips.uni_freelance">
               <span class="skill-label">PHP</span>
               <div class="star-glow"></div>
             </div>
           
-            <div class="skill-node advanced" style="top: 40%; left: 70%;" id="skill-docker" data-tooltip="Used in multiple projects">
+            <div class="skill-node advanced" style="top: 40%; left: 70%;" id="skill-docker" data-i18n-tooltip="sections.skills_tooltips.multiple">
               <span class="skill-label">Docker</span>
               <div class="star-glow"></div>
             </div>
-            <div class="skill-node advanced" style="top: 55%; left: 85%;" id="skill-postgres" data-tooltip="Internships at BMS Circuits and CGI France">
+            <div class="skill-node advanced" style="top: 55%; left: 85%;" id="skill-postgres" data-i18n-tooltip="sections.skills_tooltips.bms_cgi">
               <span class="skill-label">PostgreSQL</span>
               <div class="star-glow"></div>
             </div>
-            <div class="skill-node advanced" style="top: 75%; left: 75%;" id="skill-mongo" data-tooltip="University projects">
+            <div class="skill-node advanced" style="top: 75%; left: 75%;" id="skill-mongo" data-i18n-tooltip="sections.skills_tooltips.uni">
               <span class="skill-label">MongoDB</span>
               <div class="star-glow"></div>
             </div>
           
-            <div class="skill-node intermediate" style="top: 20%; left: 60%;" id="skill-java" data-tooltip="University projects">
+            <div class="skill-node intermediate" style="top: 20%; left: 60%;" id="skill-java" data-i18n-tooltip="sections.skills_tooltips.uni">
               <span class="skill-label">Java</span>
               <div class="star-glow"></div>
             </div>
-            <div class="skill-node intermediate" style="top: 80%; left: 30%;" id="skill-cpp" data-tooltip="Block Release Program at CGI France">  
+            <div class="skill-node intermediate" style="top: 80%; left: 30%;" id="skill-cpp" data-i18n-tooltip="sections.skills_tooltips.cgi_alternance">  
               <span class="skill-label">C#</span>
               <div class="star-glow"></div>
             </div>
-            <div class="skill-node intermediate" style="top: 25%; left: 80%;" id="skill-python" data-tooltip="University projects">
+            <div class="skill-node intermediate" style="top: 25%; left: 80%;" id="skill-python" data-i18n-tooltip="sections.skills_tooltips.uni">
               <span class="skill-label">Python</span>
               <div class="star-glow"></div>
             </div>
@@ -273,27 +277,36 @@
             <div class="timeline-item">
               <div class="timeline-dot expert"></div>
               <div class="timeline-content glass">
-                <span class="timeline-date">2025 - 2026</span>
-                <h3>BUT INFORMATIQUE & Alternance</h3>
-                <p>CGI France / Université de Pau</p>
+                <span class="timeline-date" data-i18n="sections.parcours_items.item1.date">2025 - 2026</span>
+                <h3 data-i18n="sections.parcours_items.item1.title">BUT INFORMATIQUE & Alternance</h3>
+                <p data-i18n="sections.parcours_items.item1.loc">CGI France / Université de Pau</p>
               </div>
             </div>
 
             <div class="timeline-item">
               <div class="timeline-dot advanced"></div>
               <div class="timeline-content glass">
-                <span class="timeline-date">2024</span>
-                <h3>Stage - Développeuse Web</h3>
-                <p>BMS CIRCUITS (VueJS, Laravel)</p>
+                <span class="timeline-date" data-i18n="sections.parcours_items.item2.date">2024</span>
+                <h3 data-i18n="sections.parcours_items.item2.title">Stage - Développeuse Web</h3>
+                <p data-i18n="sections.parcours_items.item2.loc">BMS CIRCUITS (VueJS, Laravel)</p>
               </div>
             </div>
 
             <div class="timeline-item">
               <div class="timeline-dot advanced"></div>
               <div class="timeline-content glass">
-                <span class="timeline-date">2023 - 2024</span>
-                <h3>TP DÉVELOPPEUR WEB</h3>
-                <p>GRETA CFA AQUITAINE</p>
+                <span class="timeline-date" data-i18n="sections.parcours_items.item3.date">2023 - 2024</span>
+                <h3 data-i18n="sections.parcours_items.item3.title">TP DÉVELOPPEUR WEB</h3>
+                <p data-i18n="sections.parcours_items.item3.loc">GRETA CFA AQUITAINE</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot intermediate"></div>
+              <div class="timeline-content glass">
+                <span class="timeline-date" data-i18n="sections.parcours_items.item4.date">2018 - 2022</span>
+                <h3 data-i18n="sections.parcours_items.item4.title">Licence en Langues Étrangères</h3>
+                <p data-i18n="sections.parcours_items.item4.loc">Université de La Havane</p>
               </div>
             </div>
           </div>

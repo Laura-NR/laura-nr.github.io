@@ -51,6 +51,22 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.style.display = "none";
     document.body.style.overflow = "auto"; // Restore scroll
   };
+
+  const downloadLinks = document.querySelectorAll('a[download]');
+  downloadLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const langMap = {
+        'en': 'cv-english.png',
+        'es': 'cv-spanish.png',
+        'de': 'cv-german.png',
+        'fr': 'cv-french.png'
+      };
+      
+      const fileName = langMap[currentLang] || 'cv-french.png';
+      link.href = `resources/images/${fileName}`;
+      link.download = fileName;
+    });
+  });
 });
 
 // Function to display stars in the background
@@ -250,6 +266,16 @@ function setLanguage(lang) {
       }
     } 
   });
+
+  document.querySelectorAll("[data-i18n-tooltip]").forEach((el) => {
+    const keys = el.getAttribute("data-i18n-tooltip").split(".");
+    let translation = translations[lang];
+    keys.forEach((key) => { if (translation) translation = translation[key]; });
+    
+    if (translation) {
+      el.setAttribute("data-tooltip", translation);
+    }
+  });
 }
 
 function populateLanguageDropdown(currentLang) {
@@ -424,3 +450,165 @@ function drawConstellation() {
 window.addEventListener('load', drawConstellation);
 window.addEventListener('resize', drawConstellation);
 
+
+function initGravityStars() {
+  const section = document.getElementById('parcours');
+  const starCount = 15;
+  const starsArray = [];
+
+  for (let i = 0; i < starCount; i++) {
+    const star = document.createElement('div');
+    star.className = 'gravity-star';
+    const size = Math.random() * 3 + 1;
+    star.style.width = `${size}px`;
+    star.style.height = `${size}px`;
+    section.appendChild(star);
+    starsArray.push({
+      el: star,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * 500,
+      vx: 0,
+      vy: 0
+    });
+  }
+
+  section.addEventListener('mousemove', (e) => {
+    const rect = section.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    starsArray.forEach((star, i) => {
+      const dx = mouseX - star.x;
+      const dy = mouseY - star.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      
+      // Pull stars toward mouse
+      if (dist < 300) {
+        star.vx += dx * 0.001;
+        star.vy += dy * 0.001;
+      }
+
+      star.x += star.vx;
+      star.y += star.vy;
+      star.vx *= 0.95; // Friction
+      star.vy *= 0.95;
+
+      star.el.style.transform = `translate(${star.x}px, ${star.y}px)`;
+    });
+  });
+}
+window.addEventListener('load', initGravityStars);
+
+/**
+ * Interactive Nebula Cluster with Repel Effect
+ */
+function initCursorCluster() {
+  const canvas = document.getElementById('cursor-cluster-canvas');
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  const particleCount = 50; 
+  let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+  let isRepelling = false;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // Track Mouse Movement
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  // Repel on Click
+  window.addEventListener('mousedown', () => isRepelling = true);
+  window.addEventListener('mouseup', () => isRepelling = false);
+
+  class StarParticle {
+    constructor() {
+      this.init();
+    }
+
+    init() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 1.5 + 0.3;
+      this.speedX = 0;
+      this.speedY = 0;
+      
+      // Using Expert Gold and White from your site
+      this.color = Math.random() > 0.4 ? "#ffffff" : "#ffcc70"; 
+      
+      this.offsetX = (Math.random() - 0.5) * 250; 
+      this.offsetY = (Math.random() - 0.5) * 250;
+      
+      this.friction = 0.95;
+      this.ease = 0.01 + Math.random() * 0.015;
+    }
+
+    update() {
+      let targetX = mouse.x + this.offsetX;
+      let targetY = mouse.y + this.offsetY;
+
+      let dx = targetX - this.x;
+      let dy = targetY - this.y;
+      let distance = Math.sqrt(dx * dx + dy * dy);
+
+      // --- REPEL LOGIC ---
+      if (isRepelling && distance < 200) {
+        // Push stars away from the actual mouse position (not the offset target)
+        let pushX = mouse.x - this.x;
+        let pushY = mouse.y - this.y;
+        let pushDist = Math.sqrt(pushX * pushX + pushY * pushY);
+        
+        if (pushDist < 150) {
+          this.speedX -= (pushX / pushDist) * 2;
+          this.speedY -= (pushY / pushDist) * 2;
+        }
+      }
+
+      // Normal following movement
+      this.speedX += dx * this.ease;
+      this.speedY += dy * this.ease;
+
+      this.speedX *= this.friction;
+      this.speedY *= this.friction;
+
+      this.x += this.speedX;
+      this.y += this.speedY;
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      
+      if (this.color === "#ffcc70") {
+        ctx.shadowBlur = 5;
+        ctx.shadowColor = "#ffcc70";
+      }
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new StarParticle());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+window.addEventListener('load', initCursorCluster);

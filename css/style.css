@@ -67,6 +67,10 @@ body {
   }
 }
 
+header, main, footer {
+  z-index: 5;
+}
+
 header ul {
   width: 88%;
   height: 70px;
@@ -1270,6 +1274,7 @@ footer svg {
   order: 4;
   align-self: center; /* Don't make the button full width */
   margin-bottom: 1rem;
+  text-decoration: none;
 }
 
 /* Adjust projects container to smaller grid cards */
@@ -1402,4 +1407,13 @@ footer svg {
   #hideSideBarButton svg path {
     fill: var(--white) !important; /* Makes it visible */
   }
+}
+
+.gravity-star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1; /* Higher than background (-1), lower than glass boxes (2+) */
+  transition: transform 0.1s ease-out, opacity 0.5s;
 }
