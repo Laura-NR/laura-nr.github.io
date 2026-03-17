@@ -67,6 +67,10 @@ document.addEventListener("DOMContentLoaded", () => {
       link.download = fileName;
     });
   });
+
+  document.querySelectorAll('.sidebar a').forEach(link => {
+    link.addEventListener('click', hideSidebar);
+  });
 });
 
 // Function to display stars in the background
@@ -329,7 +333,7 @@ function changeLanguage(lang) {
 
   // Apply translations to the page
   setLanguage(lang);
-
+  hideSidebar();
   console.log(`Language changed to: ${lang}`);
 }
 

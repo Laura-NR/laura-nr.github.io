@@ -67,8 +67,12 @@ body {
   }
 }
 
-header, main, footer {
+main, footer {
   z-index: 5;
+}
+
+header {
+  z-index: 6;
 }
 
 header ul {
