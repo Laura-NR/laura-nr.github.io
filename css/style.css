@@ -19,15 +19,13 @@ html {
 
 body {
   min-height: 100vh;
-  background: linear-gradient(
-    180deg,
-    var(--bg-third-color) 0%,
-    var(--bg-primary-color) 50%,
-    var(--bg-secondary-color) 100%
-  );
+  background: linear-gradient(180deg,
+      var(--bg-third-color) 0%,
+      var(--bg-primary-color) 50%,
+      var(--bg-secondary-color) 100%);
   background-attachment: fixed;
   color: var(--white);
-  font-family: "kind_sansthin", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 1rem;
   overflow-x: hidden;
   margin: 0;
@@ -57,17 +55,20 @@ body {
     transform: translateY(0);
     opacity: 0;
   }
+
   10%,
   90% {
     opacity: 1;
   }
+
   100% {
     transform: translateY(-100px);
     opacity: 0;
   }
 }
 
-main, footer {
+main,
+footer {
   z-index: 5;
 }
 
@@ -108,14 +109,13 @@ header nav li:first-child {
 }
 
 .logo {
-  font-family: "loyal_sansregularv1", sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 2rem;
-  font-weight: bold;
   cursor: pointer;
 }
 
 header li:not(:first-child) {
-  font-weight: 900;
+  font-weight: 500;
 }
 
 header li:not(:first-child):hover,
@@ -132,9 +132,11 @@ header li:not(:first-child):focus {
   height: 100vh;
   width: 250px;
   z-index: 999;
-  background-color: #1017361a;
-  box-shadow: -5px 0 5px 0 rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
+  background-color: rgba(16, 23, 54, 0.6);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   display: none;
   flex-direction: column;
   align-items: flex-start;
@@ -197,13 +199,15 @@ header li:not(:first-child):focus {
   cursor: pointer;
 }
 
-.dropdown_item:hover, .dropdown_item:focus {
-  border: 1px solid var(--white); 
+.dropdown_item:hover,
+.dropdown_item:focus {
+  border: 1px solid var(--white);
   transition: 0.3s ease-in-out;
 }
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content, .dropdown:focus .dropdown-content {
+.dropdown:hover .dropdown-content,
+.dropdown:focus .dropdown-content {
   display: block;
 }
 
@@ -211,6 +215,7 @@ header li:not(:first-child):focus {
 #showSideBarButton svg {
   stroke: var(--white);
 }
+
 .sidebar .dropdown {
   width: 100%;
 }
@@ -223,7 +228,8 @@ header li:not(:first-child):focus {
 }
 
 .sidebar .dropdown-content {
-  position: static; /* Remove absolute positioning for sidebar */
+  position: static;
+  /* Remove absolute positioning for sidebar */
   box-shadow: none;
   position: absolute;
   top: 100%;
@@ -234,9 +240,11 @@ header li:not(:first-child):focus {
   0% {
     filter: drop-shadow(0 0 5px rgba(255, 204, 112, 0.7));
   }
+
   50% {
     filter: drop-shadow(0 0 15px rgba(255, 204, 112, 1));
   }
+
   100% {
     filter: drop-shadow(0 0 5px rgba(255, 204, 112, 0.7));
   }
@@ -247,27 +255,49 @@ header li:not(:first-child):focus {
   0% {
     transform: translateX(0);
   }
+
   25% {
-    transform: translateX(-5px); /* Move to the left */
+    transform: translateX(-5px);
+    /* Move to the left */
   }
+
   50% {
-    transform: translateX(5px);  /* Move to the right */
+    transform: translateX(5px);
+    /* Move to the right */
   }
+
   75% {
-    transform: translateX(-3px); /* Move a little to the left */
+    transform: translateX(-3px);
+    /* Move a little to the left */
   }
+
   100% {
-    transform: translateX(0); /* Back to center */
+    transform: translateX(0);
+    /* Back to center */
   }
 }
 
 /* Wobble effect */
 @keyframes wobble {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(-5deg); }
-  50% { transform: rotate(5deg); }
-  75% { transform: rotate(-3deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-5deg);
+  }
+
+  50% {
+    transform: rotate(5deg);
+  }
+
+  75% {
+    transform: rotate(-3deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .wobble {
@@ -287,7 +317,7 @@ section {
 }
 
 #job_title {
-  font-family: "loyal_sansregularv1", sans-serif;
+  font-family: 'Outfit', sans-serif;
   text-align: center;
   font-size: 4.8rem;
   margin: 1rem 0;
@@ -296,7 +326,7 @@ section {
 #description {
   color: var(--white);
   font-size: 1.2rem;
-  font-weight: 800;
+  font-weight: 400;
   line-height: 1.5;
   margin: 1rem 0;
   text-align: justify;
@@ -322,18 +352,21 @@ canvas {
 #skills_title,
 #projects_title {
   font-size: 4.5rem;
-  font-family: "loyal_sansregularv1", sans-serif;
-  margin-bottom: 3rem; /* Space between title and skill blocks */
+  font-family: 'Outfit', sans-serif;
+  margin-bottom: 3rem;
+  /* Space between title and skill blocks */
 }
 
 #skills_title {
-  margin-bottom: 0; /* Remove bottom margin for better spacing with skill blocks */
+  margin-bottom: 0;
+  /* Remove bottom margin for better spacing with skill blocks */
 }
 
 /* Container adjustment */
 #skill_blocks_container {
   display: flex;
-  gap: 4rem; /* Adds space between cards */
+  gap: 4rem;
+  /* Adds space between cards */
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
@@ -344,7 +377,8 @@ canvas {
 .star-map-container {
   position: relative;
   width: 100%;
-  min-height: 550px; /* Base height */
+  min-height: 550px;
+  /* Base height */
   margin: 0 auto;
   perspective: 1000px;
   overflow: visible;
@@ -363,27 +397,35 @@ canvas {
 
 .constellation-line {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.25); /* More subtle */
+  stroke: rgba(255, 255, 255, 0.25);
+  /* More subtle */
   stroke-width: 1px;
-  stroke-dasharray: 6 4; /* Elegant dashed pattern */
+  stroke-dasharray: 6 4;
+  /* Elegant dashed pattern */
   stroke-linecap: round;
   filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
 }
 
 @keyframes lineFade {
-  from { opacity: 0.2; }
-  to { opacity: 0.6; }
+  from {
+    opacity: 0.2;
+  }
+
+  to {
+    opacity: 0.6;
+  }
 }
 
 /* --- Skill Nodes (Stars) --- */
 .skill-node {
   position: absolute;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* Tell the browser to scale from the bottom center */
-  transform-origin: bottom center; 
+  /* Tell the browser to scale from the center to prevent constellation line drifting */
+  transform-origin: center center;
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
   z-index: 2;
@@ -396,58 +438,100 @@ canvas {
 }
 
 .skill-label {
-  font-family: "kind_sansthin", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1px;
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease, text-shadow 0.3s ease;
 }
 
 /* --- Proficiency Hierarchy --- */
 /* Expert: Top skills like VueJS, ReactJS, Laravel  */
-.expert .skill-label { font-size: 1.4rem; color: #ffcc70; text-shadow: 0 0 15px #ffcc70; }
-.expert .star-glow { background: #ffcc70; box-shadow: 0 0 20px #ffcc70; width: 12px; height: 12px; }
-
-/* Advanced: Solid stack like PostgreSQL, NodeJS, PHP [cite: 10, 61, 62] */
-.advanced .skill-label { font-size: 1.1rem; color: #ffffff; }
-.advanced .star-glow { background: #ffffff; box-shadow: 0 0 15px #ffffff; width: 8px; height: 8px; }
-
-/* Intermediate: MongoDB, Java, Python  */
-.intermediate .skill-label { 
-  font-size: 1rem; /* Slightly larger for legibility */
-  color: rgba(255, 255, 255, 0.9); /* Much more opaque */
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4); /* Subtle label glow */
-  opacity: 1; /* Ensure they aren't faded */
+.expert .skill-label {
+  font-size: 1.4rem;
+  color: #ffcc70;
+  text-shadow: 0 0 15px #ffcc70;
 }
 
-.intermediate .star-glow { 
-  background: rgba(255, 255, 255, 0.8); 
-  width: 6px; 
-  height: 6px; 
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5); /* Stronger star glow */
-  opacity: 1; 
+.expert .star-glow {
+  background: #ffcc70;
+  box-shadow: 0 0 20px #ffcc70;
+  width: 12px;
+  height: 12px;
+}
+
+/* Advanced: Solid stack like PostgreSQL, NodeJS, PHP [cite: 10, 61, 62] */
+.advanced .skill-label {
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+.advanced .star-glow {
+  background: #ffffff;
+  box-shadow: 0 0 15px #ffffff;
+  width: 8px;
+  height: 8px;
+}
+
+/* Intermediate: MongoDB, Java, Python  */
+.intermediate .skill-label {
+  font-size: 1rem;
+  /* Slightly larger for legibility */
+  color: rgba(255, 255, 255, 0.9);
+  /* Much more opaque */
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  /* Subtle label glow */
+  opacity: 1;
+  /* Ensure they aren't faded */
+}
+
+.intermediate .star-glow {
+  background: rgba(255, 255, 255, 0.8);
+  width: 6px;
+  height: 6px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+  /* Stronger star glow */
+  opacity: 1;
 }
 
 /* --- Interactivity --- */
 .skill-node:hover {
-  transform: scale(1.2);
   z-index: 10;
 }
 
 .skill-node:hover .skill-label {
+  transform: scale(1.2);
   color: #fff;
   opacity: 1;
-  text-shadow: 0 0 20px rgba(255,255,255,0.8);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.3); opacity: 1; }
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
 }
 
 @keyframes twinkle {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 1; text-shadow: 0 0 12px white; }
+
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 12px white;
+  }
 }
 
 .intermediate .skill-label {
@@ -458,29 +542,32 @@ canvas {
 .skill-node::after {
   content: attr(data-tooltip);
   position: absolute;
-  bottom: 130%; 
+  bottom: 130%;
   left: 50%;
   transform: translateX(-50%);
   width: 220px;
-  
+
   /* High Contrast Background */
-  background: #101736; /* Using your solid --bg-primary-color */
+  background: #101736;
+  /* Using your solid --bg-primary-color */
   color: #ffffff;
-  border: 1.5px solid rgb(255, 204, 112); /* Expert gold color */
-  
+  border: 1.5px solid rgb(255, 204, 112);
+  /* Expert gold color */
+
   padding: 12px;
   border-radius: 10px;
-  font-family: sans-serif; /* Clean font for small text */
+  font-family: sans-serif;
+  /* Clean font for small text */
   font-size: 0.85rem;
   line-height: 1.4;
   text-align: center;
-  
+
   /* Hidden state */
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
   z-index: 999;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
 }
 
 /* Show on Hover */
@@ -494,14 +581,14 @@ canvas {
   content: '';
   position: absolute;
   bottom: 110%;
-  left: 50%;    
+  left: 50%;
   transform: translateX(-50%);
   border-width: 8px;
   border-style: solid;
   border-color: rgba(255, 204, 112, 0.5) transparent transparent transparent;
   opacity: 1;
   transition: all 0.3s ease;
-} 
+}
 
 #parcours {
   min-height: 500px;
@@ -511,11 +598,13 @@ canvas {
 
 #parcours_title {
   font-size: 4.5rem;
-  font-family: "loyal_sansregularv1", sans-serif;
+  font-family: 'Outfit', sans-serif;
   margin-bottom: 7.5rem;
   position: relative;
-  z-index: 10; /* Ensure title is on top */
-  display: block; /* Force visibility in desktop */
+  z-index: 10;
+  /* Ensure title is on top */
+  display: block;
+  /* Force visibility in desktop */
   visibility: visible;
 }
 
@@ -535,7 +624,8 @@ canvas {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   width: 100%;
-  max-width: 1200px; /* Limits the overall width */
+  max-width: 1200px;
+  /* Limits the overall width */
   margin-top: 2rem;
 }
 
@@ -543,26 +633,27 @@ canvas {
   display: flex;
   flex-direction: column;
   /* Darker glass effect to keep project screenshots legible */
-  background: rgba(16, 23, 54, 0.4); 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(16, 23, 54, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   /* Thin, glowing border */
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   transition: all 0.4s ease;
 }
 
 .project-card:hover {
   transform: translateY(-12px);
   /* Brighter glow on hover to match your star nodes */
-  border-color: rgba(255, 204, 112, 0.4); 
+  border-color: rgba(255, 204, 112, 0.4);
   box-shadow: 0 0 25px rgba(255, 204, 112, 0.1);
 }
 
 .card-image-container {
-  height: 300px; /* Fixed height for image area */
+  height: 300px;
+  /* Fixed height for image area */
   overflow: hidden;
   border-bottom: 1px solid var(--white);
 }
@@ -582,31 +673,35 @@ canvas {
 
 .card-info {
   padding: 2rem 1.5rem;
-  background: transparent; /* Remove any solid background */
+  background: transparent;
+  /* Remove any solid background */
   text-align: center;
 }
 
 .card-info h3 {
   color: var(--white);
-  font-family: "loyal_sansregularv1", sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
 }
 
 .tech-stack-preview {
-  color: #ffcc70; /* Use your "Expert Star" gold color for the tech tags */
+  color: #ffcc70;
+  /* Use your "Expert Star" gold color for the tech tags */
   font-weight: 600;
   letter-spacing: 1px;
   margin-bottom: 10px;
 }
 
 .view-details-btn {
-  margin-top: auto; /* Pushes button to the bottom if content varies */
+  margin-top: auto;
+  /* Pushes button to the bottom if content varies */
   padding: 0.8rem 1.5rem;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: var(--white);
-  border-radius: 50px; /* Pill shape to match Skill tags */
+  border-radius: 50px;
+  /* Pill shape to match Skill tags */
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -621,7 +716,7 @@ canvas {
 #get_in_touch {
   font-size: 4.5rem;
   margin-bottom: 4rem;
-  font-family: "loyal_sansregularv1", sans-serif;
+  font-family: 'Outfit', sans-serif;
 }
 
 #contact_form {
@@ -659,7 +754,8 @@ canvas {
   color: var(--white);
 }
 
-#contact_form input::placeholder, textarea::placeholder {
+#contact_form input::placeholder,
+textarea::placeholder {
   color: var(--white);
 }
 
@@ -679,7 +775,8 @@ canvas {
   margin: 1rem 0;
   padding: 0.5rem 1.2rem;
   font-weight: 500;
-  border: 1px solid var(--white);;
+  border: 1px solid var(--white);
+  ;
   border-radius: 5px;
   background-color: transparent;
   color: var(--white);
@@ -691,7 +788,8 @@ canvas {
 #contact_form button:hover,
 #contact_form button:active,
 #contact_form button:focus {
-  background-color: var(--white);;
+  background-color: var(--white);
+  ;
   color: var(--black);
   transition: 0.3s ease-in-out;
 }
@@ -708,7 +806,8 @@ canvas {
   border-radius: 8px;
   background: rgba(255, 77, 77, 0.1);
   border: 1px solid rgba(255, 77, 77, 0.3);
-  color: #ff4d4d; /* High contrast red */
+  color: #ff4d4d;
+  /* High contrast red */
   text-align: center;
   font-weight: 600;
   backdrop-filter: blur(5px);
@@ -740,7 +839,9 @@ footer svg {
   */
 
 @media screen and (max-width: 1500px) {
-  #studio, #ski {
+
+  #studio,
+  #ski {
     flex-direction: column;
   }
 
@@ -757,11 +858,13 @@ footer svg {
 
   /* Reorder the elements */
   #ski .img_container {
-    order: 1; /* Move the image container above the text for #ski */
+    order: 1;
+    /* Move the image container above the text for #ski */
   }
 
   #ski .project_info {
-    order: 2; /* Keep the project info below the image */
+    order: 2;
+    /* Keep the project info below the image */
   }
 }
 
@@ -884,10 +987,15 @@ footer svg {
 }
 
 @media screen and (max-width: 800px) {
-  #job_title, #get_in_touch, #projects_title, #skills_title, #parcours_title {
+
+  #job_title,
+  #get_in_touch,
+  #projects_title,
+  #skills_title,
+  #parcours_title {
     font-size: 3rem;
   }
-  
+
   #parcours_title {
     margin-bottom: 3rem;
   }
@@ -909,8 +1017,9 @@ footer svg {
   }
 
   .star-map-container {
-    position: relative !important; 
-    height: 750px !important; /* Increased height for better vertical flow */
+    position: relative !important;
+    height: 750px !important;
+    /* Increased height for better vertical flow */
     display: block !important;
     width: 100%;
     overflow: visible;
@@ -918,36 +1027,84 @@ footer svg {
 
   .skill-node {
     position: absolute !important;
-    transform: translate(-50%, -50%); /* Centers the node on the coordinate */
+    transform: translate(-50%, -50%);
+    /* Centers the node on the coordinate */
   }
 
   /* Spreading left values to use more of the screen width */
-  #skill-react    { left: 15%; top: 8%; }
-  #skill-vue      { left: 80%; top: 18%; }
-  #skill-node     { left: 20%; top: 32%; }
-  #skill-php      { left: 85%; top: 48%; }
-  #skill-docker   { left: 15%; top: 62%; }
-  #skill-postgres { left: 80%; top: 78%; }
-  #skill-mongo    { left: 30%; top: 92%; }
-  
+  #skill-react {
+    left: 15%;
+    top: 8%;
+  }
+
+  #skill-vue {
+    left: 80%;
+    top: 18%;
+  }
+
+  #skill-node {
+    left: 20%;
+    top: 32%;
+  }
+
+  #skill-php {
+    left: 85%;
+    top: 48%;
+  }
+
+  #skill-docker {
+    left: 15%;
+    top: 62%;
+  }
+
+  #skill-postgres {
+    left: 80%;
+    top: 78%;
+  }
+
+  #skill-mongo {
+    left: 30%;
+    top: 92%;
+  }
+
   /* Positioning intermediate nodes in the 'empty' gaps */
-  #skill-java     { left: 85%; top: 5%; }
-  #skill-cpp      { left: 10%; top: 75%; }
-  #skill-python   { left: 75%; top: 90%; }
+  #skill-java {
+    left: 85%;
+    top: 5%;
+  }
+
+  #skill-cpp {
+    left: 10%;
+    top: 75%;
+  }
+
+  #skill-python {
+    left: 75%;
+    top: 90%;
+  }
 }
 
 @media screen and (max-width: 768px) {
+
   /* Fix right margin and overflow */
-  html, body { overflow-x: hidden; width: 100%; position: relative; }
-  
+  html,
+  body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+
   /* Fix Portrait Image Size */
   #about_me img {
-    height: 220px !important; /* Scale down on mobile */
+    height: 220px !important;
+    /* Scale down on mobile */
     width: auto;
   }
 
   /* Reduce space between sections */
-  section { margin: 3rem auto !important; }
+  section {
+    margin: 3rem auto !important;
+  }
 
   /* Change Sidebar Close Button (X) to White */
   #hideSideBarButton svg path {
@@ -998,7 +1155,11 @@ footer svg {
 }
 
 @media screen and (max-width: 600px) {
-  #job_title, #get_in_touch, #projects_title, #skills_title {
+
+  #job_title,
+  #get_in_touch,
+  #projects_title,
+  #skills_title {
     font-size: 2.5rem;
   }
 
@@ -1116,7 +1277,11 @@ footer svg {
 }
 
 @media screen and (max-width: 400px) {
-  #job_title, #get_in_touch, #projects_title, #skills_title {
+
+  #job_title,
+  #get_in_touch,
+  #projects_title,
+  #skills_title {
     font-size: 1.8rem;
   }
 
@@ -1177,7 +1342,7 @@ footer svg {
   .project_info a {
     font-size: 0.8rem;
   }
-  
+
 }
 
 /* Modal Overlay */
@@ -1185,8 +1350,10 @@ footer svg {
   display: none;
   position: fixed;
   z-index: 2000;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   background-color: rgba(4, 4, 4, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -1194,7 +1361,8 @@ footer svg {
 }
 
 .modal-content {
-  background: rgba(16, 23, 54, 0.65); /* Glass Background */
+  background: rgba(16, 23, 54, 0.65);
+  /* Glass Background */
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   margin: 3% auto;
@@ -1202,13 +1370,15 @@ footer svg {
   width: 90%;
   max-width: 850px;
   border-radius: 25px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
   color: white;
   /* Flexbox for clean layout */
   display: flex;
   flex-direction: column;
-  max-height: 90vh; /* Don't let it exceed the screen height */
-  overflow-y: auto; /* Internal scrolling for content */
+  max-height: 90vh;
+  /* Don't let it exceed the screen height */
+  overflow-y: auto;
+  /* Internal scrolling for content */
   padding: 2.5rem;
 }
 
@@ -1223,7 +1393,7 @@ footer svg {
 }
 
 #modal-title {
-  font-family: "loyal_sansregularv1", sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 2rem;
   margin: 0;
   line-height: 1;
@@ -1231,7 +1401,8 @@ footer svg {
 
 .close-modal {
   /* Fix misplaced position */
-  position: static; /* Remove top/right абсолю positioning */
+  position: static;
+  /* Remove top/right абсолю positioning */
   font-size: 35px;
   color: white;
   cursor: pointer;
@@ -1241,8 +1412,10 @@ footer svg {
 /* Fix huge image */
 #modal-image {
   max-width: 100%;
-  max-height: 350px; /* Constraints image vertically */
-  object-fit: contain; /* Don't crop, show full image */
+  max-height: 350px;
+  /* Constraints image vertically */
+  object-fit: contain;
+  /* Don't crop, show full image */
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   margin: 1rem 0;
@@ -1262,7 +1435,8 @@ footer svg {
 .modal-body {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Consistent spacing */
+  gap: 1.5rem;
+  /* Consistent spacing */
   overflow-y: auto;
 }
 
@@ -1271,12 +1445,14 @@ footer svg {
   font-weight: bold;
   font-size: 1.1rem;
   text-align: center;
-  order: 2; /* Moves it between image and description */
+  order: 2;
+  /* Moves it between image and description */
 }
 
 #modal-link {
   order: 4;
-  align-self: center; /* Don't make the button full width */
+  align-self: center;
+  /* Don't make the button full width */
   margin-bottom: 1rem;
   text-decoration: none;
 }
@@ -1302,7 +1478,8 @@ footer svg {
 
 .timeline-line {
   position: absolute;
-  top: 50%; /* Line is in the middle horizontally */
+  top: 50%;
+  /* Line is in the middle horizontally */
   left: 0;
   width: 100%;
   height: 2px;
@@ -1315,7 +1492,8 @@ footer svg {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 30%; /* Space out the 3 items */
+  width: 30%;
+  /* Space out the 3 items */
   position: relative;
   z-index: 2;
 }
@@ -1340,8 +1518,13 @@ footer svg {
 }
 
 /* Alternate top and bottom positions */
-.timeline-item:nth-child(odd) .timeline-content { bottom: 40px; }
-.timeline-item:nth-child(even) .timeline-content { top: 40px; }
+.timeline-item:nth-child(odd) .timeline-content {
+  bottom: 40px;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  top: 40px;
+}
 
 /* --- Mobile: Vertical Timeline --- */
 @media screen and (max-width: 768px) {
@@ -1349,35 +1532,40 @@ footer svg {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding-left: 50px; /* Create a gutter for the line */
+    padding-left: 50px;
+    /* Create a gutter for the line */
     margin: 2rem auto;
     position: relative;
   }
 
   .timeline-line {
     /* Anchor to the left gutter */
-    left: 20px !important; 
+    left: 20px !important;
     top: 0;
-    bottom: 0; /* Ensures it stretches the full height of the container */
+    bottom: 0;
+    /* Ensures it stretches the full height of the container */
     width: 2px;
-    height: auto; /* Let it follow the content height */
+    height: auto;
+    /* Let it follow the content height */
     transform: none;
   }
 
   .timeline-item {
     flex-direction: row;
     width: 100%;
-    margin-bottom: 4rem; /* More breathing room */
+    margin-bottom: 4rem;
+    /* More breathing room */
     position: relative;
   }
 
   .timeline-dot {
     position: absolute;
-    left: -37px; /* Perfectly centers the dot over the 20px line */
+    left: -37px;
+    /* Perfectly centers the dot over the 20px line */
     margin: 0;
     z-index: 5;
   }
-  
+
   .timeline-content {
     position: static;
     width: 90%;
@@ -1392,24 +1580,63 @@ footer svg {
 
   /* Force constellation nodes into a vertical column */
   /*.star-map-container { height: 800px; }*/
-  
+
   /* Rotated 90 degrees: swapping typical Left/Top logic */
-  #skill-react    { left: 20%; top: 10%; }
-  #skill-vue      { left: 60%; top: 20%; }
-  #skill-node     { left: 30%; top: 35%; }
-  #skill-php      { left: 70%; top: 50%; }
-  #skill-docker   { left: 20%; top: 65%; }
-  #skill-postgres { left: 60%; top: 80%; }
-  #skill-mongo    { left: 40%; top: 95%; }
-  
+  #skill-react {
+    left: 20%;
+    top: 10%;
+  }
+
+  #skill-vue {
+    left: 60%;
+    top: 20%;
+  }
+
+  #skill-node {
+    left: 30%;
+    top: 35%;
+  }
+
+  #skill-php {
+    left: 70%;
+    top: 50%;
+  }
+
+  #skill-docker {
+    left: 20%;
+    top: 65%;
+  }
+
+  #skill-postgres {
+    left: 60%;
+    top: 80%;
+  }
+
+  #skill-mongo {
+    left: 40%;
+    top: 95%;
+  }
+
   /* Intermediate nodes positioned around the vertical path */
-  #skill-java   { left: 80%; top: 15%; }
-  #skill-cpp    { left: 20%; top: 75%; }
-  #skill-python { left: 50%; top: 85%; }
-  
+  #skill-java {
+    left: 80%;
+    top: 15%;
+  }
+
+  #skill-cpp {
+    left: 20%;
+    top: 75%;
+  }
+
+  #skill-python {
+    left: 50%;
+    top: 85%;
+  }
+
   /* Fix Sidebar Close Icon (X) */
   #hideSideBarButton svg path {
-    fill: var(--white) !important; /* Makes it visible */
+    fill: var(--white) !important;
+    /* Makes it visible */
   }
 }
 
@@ -1418,6 +1645,7 @@ footer svg {
   background: white;
   border-radius: 50%;
   pointer-events: none;
-  z-index: 1; /* Higher than background (-1), lower than glass boxes (2+) */
+  z-index: 1;
+  /* Higher than background (-1), lower than glass boxes (2+) */
   transition: transform 0.1s ease-out, opacity 0.5s;
 }

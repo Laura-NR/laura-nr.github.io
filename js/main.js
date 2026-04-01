@@ -454,6 +454,13 @@ function drawConstellation() {
 window.addEventListener('load', drawConstellation);
 window.addEventListener('resize', drawConstellation);
 
+// Redraw after web fonts finish loading to prevent layout shifts misaligning the lines
+if (document.fonts) {
+  document.fonts.ready.then(() => {
+    drawConstellation();
+  });
+}
+
 
 function initGravityStars() {
   const section = document.getElementById('parcours');
